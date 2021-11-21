@@ -12,12 +12,18 @@ def integrate_horizontally(xpos, ypos, word, arr):
         for position,letter in enumerate(word):
             arr[ypos][xpos+position] = letter
             print(letter)
+    else:
+        print("integration failed")
+        return False
 
 def integrate_vertically(xpos, ypos, word, arr):
     if checkwordperword(2, word, xpos, ypos, arr):
         for position, letter in enumerate(word):
             arr[ypos+position][xpos] = letter
             print(letter)
+    else:
+        print("integration failed")
+        return False
 
 
 def integrate_diagonally(xpos, ypos, word, arr):
@@ -25,14 +31,16 @@ def integrate_diagonally(xpos, ypos, word, arr):
         for position, letter in enumerate(word):
             arr[ypos + position][xpos + position] = letter
             print(letter)
+    else:
+        print("integration failed")
+        return False
 
 def integratewordtoarr(direction, xpos, ypos, word, arr):
     if direction == 1:
         integrate_horizontally(xpos, ypos, word, arr)
             
     if direction == 2:
-        if ypos + len(word) <= len(arr) and checkwordperword(direction, word, xpos, ypos, arr):
-            pass
+        integrate_vertically(xpos, ypos, word, arr)
       
     if direction >= 5:
         word = word[::-1]
@@ -42,7 +50,8 @@ def integratewordtoarr(direction, xpos, ypos, word, arr):
 
 def checkwordperword(direction, word, xpos, ypos, arr):
     if direction == 1:
-        if len(word) > len(arr[ypos]):
+        print(ypos)
+        if len(word)+xpos > len(arr[0]):
             return False
         for j,i in enumerate(word):
             next_position = arr[ypos][xpos + j]
@@ -52,7 +61,7 @@ def checkwordperword(direction, word, xpos, ypos, arr):
         return True
         
     if direction == 2:
-        if len(word) > len(arr):
+        if len(word)+ypos > len(arr):
             return False
         for position, letter in enumerate(word):
             next_position = arr[ypos+position][xpos]
@@ -77,4 +86,3 @@ def checkwordperword(direction, word, xpos, ypos, arr):
         pass
 
 
-a = genemptyarr(5,5)
